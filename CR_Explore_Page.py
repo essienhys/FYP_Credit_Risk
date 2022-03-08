@@ -7,7 +7,7 @@ import plotly.express as px
 # Loading Dataset
 @st.cache(allow_output_mutation = True)
 def load_dataset():
-    df = pd.read_csv('data_WA.csv')
+    df = pd.read_excel('data_WA.xlsx')
     return(df)  
 
 def show_explore_page():
