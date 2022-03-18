@@ -226,7 +226,6 @@ def show_explore_page():
         fig5.update_layout(title_text = '<b>Correlation Matrix</b>', title_x = 0.5)
         fig5.update_xaxes(tickangle = 90)
         fig5.layout.height = 600
-        fig5.layout.width = 670
         return fig5
     
     # Show Correlation Matrix
