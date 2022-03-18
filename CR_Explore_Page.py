@@ -224,6 +224,7 @@ def show_explore_page():
     def make_fig5():
         fig5 = px.imshow(new_df[filter].corr().round(2), text_auto = True)
         fig5.update_layout(title_text = '<b>Correlation Matrix</b>', title_x = 0.5)
+        fig5.update_xaxes(tickangle = 90)
         fig5.layout.height = 600
         fig5.layout.width = 670
         return fig5
