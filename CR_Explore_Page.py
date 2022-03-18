@@ -129,38 +129,36 @@ def show_explore_page():
         st.info(f'Median Annual Income:  \n$ {median_income:,.0f}')
         
     bar, scatter = st.columns(2)
-    
-    with bar:        
+         
         # Bar Chart Option 
-        bar_option = st.selectbox('Choose a variable', ('loan_intent', 
+    bar_option = bar.selectbox('Choose a variable', ('loan_intent', 
                                                         'person_home_ownership', 
                                                         'loan_grade', 
                                                         'cb_person_default_on_file'))
 
-        # Make Bar Chart
-        groupby_li = df[filter].groupby(by = [bar_option]).count()[['person_age']]
-        groupby_li = groupby_li.rename(columns = {'person_age': 'counts'})
-        groupby_li = groupby_li.reset_index()
+    # Make Bar Chart
+    groupby_li = df[filter].groupby(by = [bar_option]).count()[['person_age']]
+    groupby_li = groupby_li.rename(columns = {'person_age': 'counts'})
+    groupby_li = groupby_li.reset_index()
     
-        @st.cache(max_entries = 10, ttl = 3600)
-        def make_fig1():
-            fig = px.bar(groupby_li, x = bar_option, y = 'counts', width = 640)
-            fig.update_layout(title_text = f'<b>Bar Chart of {bar_option}</b>', title_x = 0.5)
-            return fig
+    @st.cache(max_entries = 10, ttl = 3600)
+    def make_fig1():
+        fig = px.bar(groupby_li, x = bar_option, y = 'counts', width = 640)
+        fig.update_layout(title_text = f'<b>Bar Chart of {bar_option}</b>', title_x = 0.5)
+        return fig
     
-        # Show Bar chart
+    # Show Bar chart
     bar.plotly_chart(make_fig1(), use_container_width = True)
     
-    with scatter:
-        # Scatter Plot Selection
-        scatter_y = st.selectbox('Y-Axis', ('person_income', 
+    # Scatter Plot Selection
+    scatter_y = scatter.selectbox('Y-Axis', ('person_income', 
                                             'person_age', 
                                             'person_emp_length', 
                                             'loan_amnt', 
                                             'loan_int_rate', 
                                             'cb_person_cred_hist_length', 
                                             'loan_percent_income'))
-        scatter_x = st.selectbox('X-Axis', ('person_age', 
+    scatter_x = scatter.selectbox('X-Axis', ('person_age', 
                                             'person_income', 
                                             'person_emp_length', 
                                             'loan_amnt', 
@@ -168,14 +166,14 @@ def show_explore_page():
                                             'cb_person_cred_hist_length', 
                                             'loan_percent_income'))
     
-        # Make Scatter Plot
-        @st.cache(max_entries = 10, ttl = 3600)
-        def make_fig2():
-            fig2 = px.scatter(df[filter], x = scatter_x, y = scatter_y, width = 660)
-            fig2.update_layout(title_text = f'<b>Scatter Plot of {scatter_y} against {scatter_x}</b>', title_x = 0.5)
-            return fig2
+   # Make Scatter Plot
+    @st.cache(max_entries = 10, ttl = 3600)
+    def make_fig2():
+        fig2 = px.scatter(df[filter], x = scatter_x, y = scatter_y, width = 660)
+        fig2.update_layout(title_text = f'<b>Scatter Plot of {scatter_y} against {scatter_x}</b>', title_x = 0.5)
+        return fig2
     
-        # Show Scatter Plot
+    # Show Scatter Plot
     scatter.plotly_chart(make_fig2(), use_container_width = True)
     
     st.markdown('--------------------------')
