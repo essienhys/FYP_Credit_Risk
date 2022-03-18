@@ -248,7 +248,7 @@ def show_explore_page():
         fig3.update_layout(title_text = '<b>Parallel Category Diagram</b>', title_x = 0.5)
         return fig3  
     
-        # Show Parallel Category Diagram
-        mid.plotly_chart(make_fig3(),  use_container_width = True)
+    # Show Parallel Category Diagram
+    mid.plotly_chart(make_fig3(),  use_container_width = True)
         
         
