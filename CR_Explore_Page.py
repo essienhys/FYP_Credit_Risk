@@ -234,21 +234,21 @@ def show_explore_page():
     st.markdown('--------------------------')  
     
     left, mid, right = st.columns([20, 50, 20])
-    with mid: 
-        # Make Parallel Category Diagram of Loan Intent, Home Ownership, Loan Grade and Historical Default
-        @st.cache(max_entries = 10, ttl = 3600)
-        def make_fig3():
-            fig3 = px.parallel_categories(df[filter], color_continuous_scale= px.colors.sequential.RdBu, 
+    
+    # Make Parallel Category Diagram of Loan Intent, Home Ownership, Loan Grade and Historical Default
+    @st.cache(max_entries = 10, ttl = 3600)
+    def make_fig3():
+        fig3 = px.parallel_categories(df[filter], color_continuous_scale= px.colors.sequential.RdBu, 
                                           color = 'loan_status',
                                           dimensions = ['loan_intent', 
                                                         'person_home_ownership', 
                                                         'loan_grade', 
                                                         'cb_person_default_on_file'],
                                           labels = {col:col.replace('_', ' ') for col in df[filter].columns})
-            fig3.update_layout(title_text = '<b>Parallel Category Diagram</b>', title_x = 0.5)
-            return fig3  
+        fig3.update_layout(title_text = '<b>Parallel Category Diagram</b>', title_x = 0.5)
+        return fig3  
     
         # Show Parallel Category Diagram
-        st.plotly_chart(make_fig3())
+        mid.plotly_chart(make_fig3(),  use_container_width = True)
         
         
