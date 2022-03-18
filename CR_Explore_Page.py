@@ -178,7 +178,7 @@ def show_explore_page():
     
     st.markdown('--------------------------')
     
-    cm, pie = st.columns(2)
+    cm, pie = st.columns([20, 15])
     
     # Pie Chart Selection
     pie_option = pie.selectbox('Choose a variable', ('loan_status', 'cb_person_default_on_file'))
