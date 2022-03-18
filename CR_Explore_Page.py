@@ -149,7 +149,7 @@ def show_explore_page():
             return fig
     
         # Show Bar chart
-        st.plotly_chart(make_fig1())
+    bar.plotly_chart(make_fig1(), use_container_width = True)
     
     with scatter:
         # Scatter Plot Selection
@@ -176,7 +176,7 @@ def show_explore_page():
             return fig2
     
         # Show Scatter Plot
-        st.plotly_chart(make_fig2())
+    scatter.plotly_chart(make_fig2(), use_container_width = True)
     
     st.markdown('--------------------------')
     
