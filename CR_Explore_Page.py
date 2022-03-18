@@ -178,30 +178,28 @@ def show_explore_page():
     
     st.markdown('--------------------------')
     
-    cm, pie = st.columns([20, 15])
+    cm, pie = st.columns(2)
+    
+    # Pie Chart Selection
+    pie_option = pie.selectbox('Choose a variable', ('loan_status', 'cb_person_default_on_file'))
+    
+    # Make Pie Chart
+    groupby_ls = df[filter].groupby(by = [pie_option]).count()[['person_age']]
+    groupby_ls = groupby_ls.rename(columns = {'person_age': 'counts'})
+    groupby_ls = groupby_ls.reset_index()
+    
+    @st.cache(max_entries = 10, ttl = 3600)
+    def make_fig4():
+        fig4 = px.pie(groupby_ls, values = 'counts', names = pie_option, width = 500)
+        fig4.update_layout(title_text = f'<b>Pie Chart of {pie_option}</b>', title_x = 0.5)
+        return fig4    
+    
+    # Show Pie chart of loan status
+    pie.plotly_chart(make_fig4(), use_container_width = True)
     
     
-    with pie:
-        # Pie Chart Selection
-        pie_option = st.selectbox('Choose a variable', ('loan_status', 'cb_person_default_on_file'))
-    
-        # Make Pie Chart
-        groupby_ls = df[filter].groupby(by = [pie_option]).count()[['person_age']]
-        groupby_ls = groupby_ls.rename(columns = {'person_age': 'counts'})
-        groupby_ls = groupby_ls.reset_index()
-    
-        @st.cache(max_entries = 10, ttl = 3600)
-        def make_fig4():
-            fig4 = px.pie(groupby_ls, values = 'counts', names = pie_option, width = 500)
-            fig4.update_layout(title_text = f'<b>Pie Chart of {pie_option}</b>', title_x = 0.5)
-            return fig4    
-    
-        # Show Pie chart of loan status
-        st.plotly_chart(make_fig4())
-    
-    with cm:
-        # Correlation Matrix Selection
-        corr_mat_option = st.multiselect('Variables', 
+    # Correlation Matrix Selection
+    corr_mat_option = cm.multiselect('Variables', 
                                          ('person_age', 
                                           'person_income', 
                                           'person_emp_length', 
@@ -218,20 +216,20 @@ def show_explore_page():
                                                     'loan_status', 
                                                     'loan_percent_income', 
                                                     'cb_person_cred_hist_length'))
-        # Create a dummy DataFrame for correlation matrix
-        new_df = df[corr_mat_option]
+    # Create a dummy DataFrame for correlation matrix
+    new_df = df[corr_mat_option]
     
-        # Make Correlation Matrix
-        @st.cache(max_entries = 10, ttl = 3600)
-        def make_fig5():
-            fig5 = px.imshow(new_df[filter].corr().round(2), text_auto = True)
-            fig5.update_layout(title_text = '<b>Correlation Matrix</b>', title_x = 0.5)
-            fig5.layout.height = 600
-            fig5.layout.width = 670
-            return fig5
+    # Make Correlation Matrix
+    @st.cache(max_entries = 10, ttl = 3600)
+    def make_fig5():
+        fig5 = px.imshow(new_df[filter].corr().round(2), text_auto = True)
+        fig5.update_layout(title_text = '<b>Correlation Matrix</b>', title_x = 0.5)
+        fig5.layout.height = 600
+        fig5.layout.width = 670
+        return fig5
     
-        # Show Correlation Matrix
-        st.plotly_chart(make_fig5()) 
+    # Show Correlation Matrix
+    cm.plotly_chart(make_fig5(), use_container_width = True) 
     
     st.markdown('--------------------------')  
     
