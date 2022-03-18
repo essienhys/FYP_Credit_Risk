@@ -233,7 +233,7 @@ def show_explore_page():
     
     st.markdown('--------------------------')  
     
-    left, mid, right = st.columns([20, 50, 20])
+    left, mid, right = st.columns([10, 50, 10])
     
     # Make Parallel Category Diagram of Loan Intent, Home Ownership, Loan Grade and Historical Default
     @st.cache(max_entries = 10, ttl = 3600)
