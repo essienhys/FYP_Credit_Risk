@@ -207,15 +207,16 @@ def show_predict_page():
     
         # Action if predict button is clicked
         if predict:
-            prediction = classifier.predict(data.iloc[[0]])
-            labels = ['Non-Default', 'Default']
-            # LIME instance explanation 
-            interpretor = lime_tabular.LimeTabularExplainer(training_data = np.array(x_train_smote), 
+            with st.spinner('predicting...):
+                prediction = classifier.predict(data.iloc[[0]])
+                labels = ['Non-Default', 'Default']
+                # LIME instance explanation 
+                interpretor = lime_tabular.LimeTabularExplainer(training_data = np.array(x_train_smote), 
                                                             feature_names = data.columns, 
                                                             class_names = labels, 
                                                             mode = 'classification')
-            exp = interpretor.explain_instance(data_row = data.iloc[0], predict_fn = classifier.predict_proba)
-            exp.show_in_notebook(show_table = True)
+                exp = interpretor.explain_instance(data_row = data.iloc[0], predict_fn = classifier.predict_proba)
+                exp.show_in_notebook(show_table = True)
         
             # Show result based on the prediction outcome
             if (prediction == 1):
@@ -238,7 +239,8 @@ def show_predict_page():
     
         # Action to show global explanation if the checkbox is checked 
         if show_global_explanation:
-            # show SHAP global explanation distribution 
-            shap_global_explanation = shap.summary_plot(shap_values, x_train_smote)
-            return st.pyplot(shap_global_explanation)
+            with st.spinner('showing SHAP...'):
+                # show SHAP global explanation distribution 
+                shap_global_explanation = shap.summary_plot(shap_values, x_train_smote)
+                return st.pyplot(shap_global_explanation)
         
