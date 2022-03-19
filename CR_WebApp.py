@@ -18,7 +18,7 @@ with col2:
     st.markdown('<p class = "subheader">Developed by: Heng Yi Sheng (TP048930) <br>Supervised by: Dr. Preethi Subramanian</p>', unsafe_allow_html = True)
 
 # Create sidebar menu selection 
-menu = st.sidebar.selectbox('Predict or Explore', ('Explore', 'Predict'))
+menu = st.sidebar.selectbox('Predict or Explore', ('Predict', 'Explore'))
 
 # Change between prediction page or exploration page
 if menu == 'Predict':
