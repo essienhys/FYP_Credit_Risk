@@ -218,15 +218,15 @@ def show_predict_page():
                 exp = interpretor.explain_instance(data_row = data.iloc[0], predict_fn = classifier.predict_proba)
                 exp.show_in_notebook(show_table = True)
         
-            # Show result based on the prediction outcome
-            if (prediction == 1):
-                st.error('Customer **will default on their loan**:rage:') # Default Loan
-                st.write("*LIME Instance Explanation:*")        
-                components.html(exp.as_html(), height = 800)
-            else:
-                st.success('Customer **will meet their loan obligation**:smiley:') # Non-Default Loan
-                st.write("*LIME Instance Explanation:*")        
-                components.html(exp.as_html(), height = 800)
+                # Show result based on the prediction outcome
+                if (prediction == 1):
+                    st.error('Customer **will default on their loan**:rage:') # Default Loan
+                    st.write("*LIME Instance Explanation:*")        
+                    components.html(exp.as_html(), height = 800)
+                else:
+                    st.success('Customer **will meet their loan obligation**:smiley:') # Non-Default Loan
+                    st.write("*LIME Instance Explanation:*")        
+                    components.html(exp.as_html(), height = 800)
             
         # Button to show global explanation        
         show_global_explanation = st.checkbox('Show SHAP Global Explanation')
