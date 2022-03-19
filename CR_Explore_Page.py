@@ -135,7 +135,7 @@ def show_explore_page():
                                                         'person_home_ownership', 
                                                         'loan_grade', 
                                                         'cb_person_default_on_file'))
-    st.markdown()
+    bar.markdown()
 
     # Make Bar Chart
     groupby_li = df[filter].groupby(by = [bar_option]).count()[['person_age']]
