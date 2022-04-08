@@ -24,7 +24,7 @@ x_train_smote = pk['x_train_smote']
 
 # Function for showing the prediction page
 def show_predict_page():
-    st.sidebar.warning  ("Instruction/Guidance for LIME  \n"
+    st.sidebar.warning("Instruction/Guidance for LIME  \n"
                          "1. The blue coloured bar represent its suppport towards the non-default class, whereas the orange coloured bar represent its support towards the non-default class  \n"
                          "2. The leftmost section will reveal the prediction probabilities of the non-default and default class  \n"
                          "3. The middle section will reveal the top 10 most important features that contribute to the prediction of each class  \n"
