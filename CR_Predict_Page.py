@@ -24,6 +24,11 @@ x_train_smote = pk['x_train_smote']
 
 # Function for showing the prediction page
 def show_predict_page():
+    st.sidebar.warning  ("Instruction/Guidance for LIME  \n"
+                         "1. The blue coloured bar represent its suppport towards the non-default class, whereas the orange coloured bar represent its support towards the non-default class  \n"
+                         "2. The leftmost section will reveal the prediction probabilities of the non-default and default class  \n"
+                         "3. The middle section will reveal the top 10 most important features that contribute to the prediction of each class  \n"
+                         "4. The rightmost section consists of the top 10 features along with the values that are colour-coded according to the support towards the predictive class")
     st.markdown('--------------------------')
     
     # Input selection box 
@@ -38,13 +43,13 @@ def show_predict_page():
         # To get users input
         income = st.number_input('Annual Income', value = 8000)
         home_ownership = st.selectbox('Home Ownership', pho)
-        employment_length = st.slider('Employment Length', 0, 50, value = 8)
+        employment_length = st.slider('Employment Length (In Years)', 0, 50, value = 8)
         loan_intent = st.selectbox('Loan Intent', li)
-        loan_grade = st.selectbox('Loan Grade', lg)
+        loan_grade = st.selectbox("Loan Grade - based on the borrower's credit profile (quality of the collateral etc). 'A' grade represent the lowest risk whereas 'G' grade is the riskiest", lg)
         loan_amount = st.number_input('Loan Amount', value = 88888)
         loan_int_rate = st.number_input('Loan Interest Rate', value = 8.8)
         historical_default = st.selectbox('Historical Default', hd)
-        credit_history_length = st.slider('Credit History Length', 1, 30, value = 8)
+        credit_history_length = st.slider("Credit History Length - the age of the accounts that appears in the borrower's credit report (active credit card(s) or loan(s))", 1, 30, value = 8)
     
     
     # Assigning binary values to One Hot Encoded values
@@ -241,6 +246,7 @@ def show_predict_page():
         if show_global_explanation:
             with st.spinner('showing SHAP...'):
                 # show SHAP global explanation distribution 
+                st.warning('Red colour indicates higher value of a feature, whereas Blue colour indicates lower value of a feature')
                 shap_global_explanation = shap.summary_plot(shap_values, x_train_smote)
                 return st.pyplot(shap_global_explanation)
         
