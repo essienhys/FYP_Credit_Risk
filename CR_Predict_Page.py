@@ -36,13 +36,13 @@ def show_predict_page():
     pho = ('MORTGAGE', 'OWN', 'RENT', 'OTHER')
     li = ('DEBT CONSOLIDATION', 'EDUCATION', 'HOME IMPROVEMENT', 'MEDICAL', 'PERSONAL', 'VENTURE')
     lg = ('A', 'B', 'C', 'D', 'E', 'F', 'G')
-    hd = ('Y', 'N')
+    hd = ('N', 'Y')
     
     left, user_input, right = st.columns([2, 20, 2])
         
     with user_input:
         # To get users input
-        income = st.number_input('Annual Income', value = 8000)
+        income = st.number_input('Annual Income', value = 38000)
         home_ownership = st.selectbox('Home Ownership', pho)
         employment_length = st.slider('Employment Length (In Years)', 0, 50, value = 8)
         loan_intent = st.selectbox('Loan Intent', li)
