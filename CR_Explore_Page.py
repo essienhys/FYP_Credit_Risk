@@ -236,7 +236,7 @@ def show_explore_page():
     
     st.markdown('--------------------------')  
     
-    left, pcd, right = st.columns([20, 50, 20])
+    left, pcd, right = st.columns([10, 50, 10])
  
     # Make Parallel Category Diagram of Loan Intent, Home Ownership, Loan Grade and Historical Default
     @st.cache(max_entries = 10, ttl = 3600)
@@ -252,6 +252,6 @@ def show_explore_page():
         return fig5  
    
     # Show Parallel Category Diagram
-    pcd.plotly_chart(make_fig5())
+    pcd.plotly_chart(make_fig5(), use_container_width = True)
         
         
