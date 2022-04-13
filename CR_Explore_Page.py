@@ -241,7 +241,7 @@ def show_explore_page():
     # Make Parallel Category Diagram of Loan Intent, Home Ownership, Loan Grade and Historical Default
     @st.cache(max_entries = 10, ttl = 3600)
     def make_fig5():
-        fig5 = px.parallel_categories(df[filter], color_continuous_scale= px.colors.sequential.RdBu, 
+        fig5 = px.parallel_categories(df[filter], color_continuous_scale= px.colors.sequential.solar, 
                                       color = 'loan_status',
                                       dimensions = ['loan_intent', 
                                                     'person_home_ownership', 
