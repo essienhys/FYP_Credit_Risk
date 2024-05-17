@@ -1,4 +1,4 @@
-# **Final Year Project (FYP) - Machine Learning and Explainable Artificial Intelligence (XAI) in Credit Risk Modelling**
+# **Final Year Project (FYP) - Machine Learning and Explainable Artificial Intelligence (XAI) in Credit Risk Modelling - BSc Computer Science with a specialism in Data Analytics**
 
 ### **Publication:**
 **Title:** A Systematic Review of Machine Learning and Explainable Artificial Intelligence (XAI) in Credit Risk Modelling
